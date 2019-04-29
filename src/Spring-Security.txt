@@ -1,0 +1,5 @@
+In between servlet container and servlet they were using diffrent filters to identify the request and preprocess the request before 
+submititng it....This is done before the introduction of spring
+
+
+

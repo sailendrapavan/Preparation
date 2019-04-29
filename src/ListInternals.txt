@@ -1,0 +1,40 @@
+https://netjs.blogspot.com/2015/09/arraylist-in-java.html
+
+https://netjs.blogspot.com/2015/08/how-arraylist-works-internally-in-java.html
+
+If we add at particular index all the elements to the right move on step
+If we remove element then first occurance of element is removed
+Every element first occurance will only be effected
+
+if we add elements to iterator the corresponding collection objects get modified
+
+Remove and set objects works on recent element obtained from iterrator...
+so without performing next() ...you can't use remove or set method
+
+
+
+Iterator working
+ 
+Open Declarationjava.util.ListIterator<Object>
+
+An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration, and obtain the iterator's current position in the list. A ListIterator has no current element; its cursor position always lies between the element that would be returned by a call to previous() and the element that would be returned by a call to next(). An iterator for a list of length n has n+1 possible cursor positions, as illustrated by the carets (^) below:
+                      Element(0)   Element(1)   Element(2)   ... Element(n-1)
+ cursor positions:  ^            ^            ^            ^                  ^
+ 
+Note that the remove() and set(Object) methods are not defined in terms of the cursor position; they are defined to operate on the last element returned by a call to next() or previous().
+This interface is a member of the Java Collections Framework.
+
+https://www.javacodegeeks.com/2018/01/deal-concurrentmodificationexception-java-beware-removing-elements-arraylist-loop.html
+
+There are two remove methods in ArrayList one is remove method in iterator and one is remove in array list class
+so when you iterate you should use iterate remove method ...if you iterate and use list remove method then in next iteration
+Iterator will throw concurrent modification exception
+
+http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/00cd9dc3c2b5/src/share/classes/java/util/ArrayList.java
+
+arraylist grows its size by 50%
+arraylist is not thread safe
+array list intial capacity is 10
+if the array is filled then it incresase the size by half         int newCapacity = oldCapacity + (oldCapacity >> 1);
+Beautifully implemented 
+Array list has an array which can hold of type object

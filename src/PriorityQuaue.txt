@@ -1,0 +1,31 @@
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/PriorityQueue.java
+
+
+Priority queue 
+
+Maintains heap and give most priority element at first
+
+But if we iterate over queue it will not result in order as it directly give elemets from the queue 
+
+ 		queu.add(1);
+		queu.add(3);
+		queu.add(6);
+		queu.add(14);
+		queu.add(2);
+		queu.add(4);
+		
+Elements are added in heap based on priority
+
+		1
+	2      4
+		
+14    3     6
+
+so if we iterate we will get 1 2 4 14 3 6
+
+But when we use poll ...
+It removes first element (max prioirty) and then it arranges all the heap
+
+
+so if you use iterator then you will not get the elements in order 
+    

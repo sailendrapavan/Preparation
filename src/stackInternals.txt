@@ -1,0 +1,6 @@
+Stack completely uses vector
+
+http://developer.classpath.org/doc/java/util/Stack-source.html
+
+
+It has methods pop, push which also internally uses vector ...all methods in stack are also syncronized

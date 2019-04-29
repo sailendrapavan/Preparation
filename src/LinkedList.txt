@@ -1,0 +1,35 @@
+A very very nice article
+
+https://dzone.com/articles/linked-list-journey-continues
+
+LinkedList in java implements list queue , dqueue and list...
+Based on our requirement we can use example
+
+If you want linked list to behave as dequeue the we should use thw below
+Deque<Integer> d = new LinkedList<Integer>();
+
+If you want linked list to be used as queue
+		Queue<Integer> q = new LinkedList<Integer>();
+		
+If you want linked list to work as List then
+
+		List<Integer> ll = new LinkedList<Integer>();
+
+But implementation of add and other methods is different from array list....
+http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/9b8c96f96a0f/src/share/classes/java/util/LinkedList.java
+
+
+Check the difference between 
+
+add 				offer
+element				peek
+remove				poll
+
+Linked list has its own implementation
+
+    public boolean add(E e) {
+        linkLast(e);
+        return true;
+    }		
+    
+ 
