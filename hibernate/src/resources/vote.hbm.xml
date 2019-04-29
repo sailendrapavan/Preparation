@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="hibernate.Vote" table="Vote">
+<id name ="vid" column="id">
+<generator class="foreign">
+<param name="property">voter</param>
+</generator>
+</id>
+<property name="pname" column="pname"></property>
+<one-to-one name="voter" class="hibernate.Voter"></one-to-one>
+</class>
+</hibernate-mapping>

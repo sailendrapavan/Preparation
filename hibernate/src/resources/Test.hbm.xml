@@ -1,0 +1,10 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="hibernate.Test" table="newtable">
+<id name ="id" column="sid"></id>
+<property name="email" column="email"></property>
+<property name="name" column="name"></property>
+</class>
+</hibernate-mapping>

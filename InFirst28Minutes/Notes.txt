@@ -1,0 +1,91 @@
+Dispatched servlet-it is called front contoller
+when ever request comes it diereclty comes to dispatched servlet and add base url and sends to controllers
+--------------------------------------------
+
+ResponseBody is used to tell the spring return "hellowolrld"; dont search for view named helloworld ....
+it is not a view
+
+---------------------------------------------------
+
+Prefix and suffix can be added to every response .
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+-------------------------------------------------------------
+@RequestParam String name, ModelMap model
+
+RequestParam is used to get the values present in request (works for both get and post requests)
+
+WE use modelMap for setting some values in contoller and making it available in jsp
+-----------------------------------------------------------------
+
+Hierarchy
+                                 @component 
+                                 
+       @controller                @service                    @resposirty
+       
+It used to give a glance to the app if we write seperatley and also it have some additional properties 
+@reposirty for example have exception handilng which you will not be get if you use @component
+
+
+Pom--project object model
+
+-------------------------------------------------------------------------
+What is meant by inversion of control ?
+
+class dd(){
+
+private Test t= new Test();
+
+}
+
+Here the above class have control on when the object need to be created but through spring we are taking out the control
+and giving it to the spring frame work
+@autowired
+private Test t
+
+-------------------------------------------------------------------------------
+BeanFactory 
+
+
+Application content 
+
+
+---------------------------------------------------------------------------------
+Name a file called app.properties
+@propertySource("classpath:app.properties)
+
+Write above main class 
+
+and where you want use the property in a particular file then use below annotation above the variable;
+@Value("${urlvalue}")
+private String url;
+
+-------------------------------------------------------------------------------------------
+@postConstruct if we use this annotation then after the construction of instance by spring then it will call that method in the class
+@predestroy before destroying the bean this method will use
+Both methods return type should be void
+
+
+-------------------------------------------------------------------------------
+CDI is an interface which procide guidelines for dependency injenction
+
+Like JPA and hibernate
+
+@inject(@Autowired)
+@Named(@componenet and @qualifier)
+@singleton(Defines the scope of the singleton)
+dependency
+<javax.inject>
+------------------------------------------------------------------------------
+load-on-startup based on the value present in the tag . servlet will be loaded based on the value of the tag
+
+https://javapapers.com/spring/spring-component-service-repository-controller-difference/
+You will find the differnces between all the annotations
+
+
+
+--------------------------------------------------------------------------------------------------
+

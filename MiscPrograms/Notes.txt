@@ -1,0 +1,32 @@
+Exceptions
+
+
+There are two types of exceptions one is checcked exceptions and other is uncheckeed exceptions
+
+unchecked exceptions are run time exceptions(Compiler will not check during compilation) eg arrayindexoutofbound etc
+
+checked exceptions..these exceptions are checked during compilation example classnotfound, filenotfound etc
+
+throws keyworkd can be used only for method not for the class
+
+usage : while desigining api for a particular method we can write throws (checkedException) ...so client when he calls this method have to deal with
+the exception using try and catch.....so we if some exception is raised client has the fesabilty to go in another way (in catch)
+example database connectivity we should handle in try and catch because driver manager classes may throw exception if connectivity may be wrong
+
+
+why it is only for checked exceptions 
+
+There is no use if we give for uncheccked exceptions. Example user has given input 10,0 it will raise divisionbyzero...if client catch he cannot 
+do anything other than changing arguments...if filenotfound(checkedException) is thrown...in catch we can give an option like write it to console.....
+
+
+
+Threads
+
+https://www.nakov.com/inetjava/lectures/part-1-sockets/InetJava-1.3-Multithreading.html
+Daemon thread in java
+When a thread is marked as daemon thread, JVM doesn’t wait it to finish to terminate the program. As soon as all the user threads are finished, JVM terminates the program as well as all the associated daemon threads.
+
+Thread.setDaemon(true) is used to create a daemon thread in java. This method should be invoked before the thread is started otherwise it will throw IllegalThreadStateException.
+https://dzone.com/articles/threads-top-80-interview
+https://howtodoinjava.com/java/multi-threading/object-vs-class-level-locking/

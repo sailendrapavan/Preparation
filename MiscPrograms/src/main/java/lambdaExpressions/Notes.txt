@@ -1,0 +1,221 @@
+Functional Interface
+
+Functional interfaces provide target types for lambda expressions and method references. 
+Each functional interface has a single abstract method, called the functional method for that 
+functional interface, to which the lambda expression's parameter and return types are matched or 
+adapted. Functional interfaces can provide a target type in multiple contexts, such as assignment 
+context, method invocation, or cast context
+
+Functional interface is used in lambda expressions
+
+A interface which is having more than one method cannot be used by lambda
+
+If we want to restrict interface to be functional we can use @function on interface. So that if 
+some one tries to add other method it will throw compilation error
+
+
+Before lambda expressions we used to implement through anonymous inner class
+Now implementation can be done with the help of lambda expressions
+https://www.nagarro.com/en/blog/post/26/lambda-expressions-in-java-8-why-and-how-to-use-them
+
+Filter accepts predicate
+ForEach accepts consumer
+
+We have so many interfaces like consumer, function , predicate 
+
+For all those interfaces we have to write our own implemetations
+--------------------------------------------------------------------------------------
+For example filter (accepts predicate)
+
+ ss.stream().filter(a -> {
+            if (a.startsWith("a")) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+ ss.stream().filter(a -> validate a and return boolean)
+predicate return type is boolean..So we can write what ever logic we want inside filter but it
+should return boolean.
+filter uses our code to filter the elements in the stream. The source code of filter is available in 
+ReferencePipeline.
+we are overriding the method     boolean test(T t); in the predicate
+So in filter implementation logic they use our definition to filter the elements
+----------------------------------------------------------------------------------
+ForEach
+forEach accepts Consumer interface type object
+    void accept(T t);
+we have to override the accept method in consumer interface.
+        ss.stream().map(a -> a).forEach(b -> {
+            if (b.contains("a")) {
+                ss.remove(b);
+            }
+        });
+        ss.stream().map(a -> a).forEach(b -> {
+          you can write any business logic but it should be of type void
+            }
+        });
+
+forEach implementation is available in ReferencePipeline.java it uses calls accept method which internally
+uses our implementation of our business logic.
+--------------------------------------------------------------------------------------
+ss.stream().collect(Collectors.toMap(a->a, a->a.length())).forEach((a,b) (wrong)
+
+In the above stream we have collected to map. So in this case forEach accepts biconsumer instead of consumer
+ 
+ss.stream().collect(Collectors.toMap(a->a, a->a.length())).forEach((a,b)->System.out.println(a+b));
+
+
+Biconsumer is an interface which accepts two arguments and have type void
+    void accept(T t, U u);
+    
+We are providing bisconsumer implementation and this will used by forEach method available in ReferencePipeline.java
+
+-----------------------------------------------------------------------------------------
+Map
+This method accepts the object of type Function 
+Function<T, R>
+    R apply(T t);
+We have to override this apply method.If we provide object of type T. It will return object of type R
+
+somelist.stream().map(x->x.toString()))
+
+So what we are asking map to do id...we will give x of type integer convert that into toString and return
+to us.. So we can specify input and ouptput in which way we want...below are some examples
+somelist.stream().map(x->x*2))
+
+Map implementation is available in ReferencePipeline.java
+
+--------------------------------------------------------------------------------------------
+Optional is a class
+we have some methods in stream like findFirst() and findany(). Impementations if those methods
+are available ReferencePipeline. when we call these Methods it will return object of type optional 
+
+ss.stream().map(a -> a.length()).findAny();
+
+It will return any object which is present in the stream. If we want the first element in the stream
+then we can use
+
+ss.stream().map(a -> a.length()).findFirst();
+---------------------------------------------------------------------------------------------------
+Collect is method in streams
+
+Collect is abstract method in streams and it is getting implemented by referencepipeline. It accpets 
+Object of type Collector object.
+We can use the methods inside the Collector and can send to this collect method in refernce pipeline
+        ss.stream().collect(Collectors.toList());
+        we have so many methods like toSet(),
+        Collectors.toMap(a->a, a->a.length())
+toMap changes into key value pair the way we want.
+
+----------------------------------------------------------------------------------------------------
+Flatmap
+
+If map returns only one element then we use normal map.
+
+But if we our element returns multiple elements then our map will have array of streams
+
+Consider below example
+
+
+  ss.stream().map(a -> {
+            ArrayList<Integer> ff = new ArrayList<>();
+            for(int i=0;i<a.length();i++) {
+                ff.add(i);
+            }
+            return ff;
+        }).forEach(a-> System.out.println(a));
+
+[0]
+[0, 1, 2, 3]
+[0, 1, 2, 3, 4]
+array of streams. To convert all the elements into a single stream we use flatMap. Remember while
+Returning we have to convert that into stream.
+
+  ss.stream().flatMap(a -> {
+            ArrayList<Integer> ff = new ArrayList<>();
+            for(int i=0;i<a.length();i++) {
+                ff.add(i);
+            }
+            return ff.stream();
+        }).forEach(a-> System.out.println(a));
+---------------------------------------------------------------------------
+mapToInt is a abstract method avialble in streams.java and its implementation is avialable in reference pipe line
+
+mapToInt accepts a object of type function. We have to implement its definiton (Same as map)
+
+The main diffrence is it automatically converts stream to int or double 
+
+ss.stream().mapToDouble(a->{
+          if(a.length()>0) {
+              return a.length();
+          }
+          return 0; 
+       }).forEach(s->System.out.println(s));;
+interger will be typecasted to double
+
+mapToInt returns IntStream instead of stream so it has some spefic methods which can perform like sum etc
+
+
+mapToLong is same as this. These have one more advantage than map ie it has some functions like sum.Which sums all the
+elements in stream. If we use map we have to use reduce to sum all the elements
+---------------------------------------------------------------------------------
+
+
+FlatMap and mapToint etc
+
+http://hg.openjdk.java.net/lambda/lambda/jdk/file/38379cea9127/src/share/classes/java/util/stream/Stream.java
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/function/Predicate.java
+https://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/Collection.java
+https://github.com/JetBrains/jdk8u_jdk/blob/master/src/share/classes/java/util/stream/ReferencePipeline.java#L172
+https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/java/util/function/Consumer.java
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/function/BiConsumer.java
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/function/Function.java
+https://github.com/netroby/jdk9-dev/blob/master/jdk/src/java.base/share/classes/java/util/Optional.java
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/stream/Collectors.java
+https://www.nagarro.com/en/blog/post/26/lambda-expressions-in-java-8-why-and-how-to-use-them
+------------------------------------------------------------------------------------------------------
+It is not dymanically typed.. Complier understand based on the data type in list and behave 
+Most of the compiler code is rewritten for java 8
+Pipe Line of operations(Streams)
+source zero or more intermdiate operations
+Terminal operation
+
+------------------------------------------------------
+Lambda Expression helps in lazyLoading
+
+logger.finest(getSomeData());
+But logger level is info . Even then as it is eager loading it loades data and then see root level as info so 
+it does not print.
+
+logger.finest(()-> getSomeData());
+
+If logger doesnot need value it will  not load 
+-----------------------------------------------------------
+when to use and not use parallel streams
+https://www.youtube.com/watch?v=dfjKTvdWO4U
+
+When not to use
+----------------------------------
+Prallel stream internally splits the data and work independelty (uses fork/join) and collect the results later.
+This fork join is expensive operation
+First it splits the tasks
+Operate parallely
+Waits for other all tasks to finsh and merge
+So work done is more than sequentail steam.
+ 
+ 1)Based on the collection we should decide weather we use parallel stream or not. Example array list can split
+ easily by low+high/2 . But when comes to linked list it has to iterate and find lenth and then split. So it
+ Splitting is an expensive operation.
+ 2)We can enjoy parallel benifits with large data only..when comes to small data work done by splitting is more than
+ operations in that case we cant enjoy benifits from that
+ 3)Suppose we use parralel and convert the result to set. Parllel streams gives small sets and all these
+ sets have to joined to form lage set. Adding of sets is intensive task it have to check element is available or not
+ 4)When the system have only one core then it is not at all useful.
+ 5)There is no mechanism to shut down processing of parallel stream like excetor service(Threads sutdown will be
+ Handled ingternally)
+ 
+
+ 
+ 

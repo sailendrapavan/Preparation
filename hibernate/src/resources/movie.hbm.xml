@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="hibernate.Movie" table="Movie">
+<id name ="id" column="id">
+<generator class="hibernate.Mygenerator"></generator></id>
+
+<property name="movie" column="movie"></property>
+
+<property name="showtime" column="showtime"></property>
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss:S"/>
+
+    <!-- For now, all we need is just the stdout appender because
+         Hudson/Jenkins stores the output for us - therefore no need
+         for the rolling file appender (it's redundant) - Jason -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%t %d %-5p [%c]: %m%n</Pattern>
+        </encoder>
+    </appender>
+
+
+
+
+    <root level="DUBUG">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

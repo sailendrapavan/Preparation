@@ -1,0 +1,46 @@
+
+
+Heapify(A,i)
+
+l=2*i;
+r=2*i+1;
+
+if(l<=a.size&&a[l]>a[i])
+{
+largest=l;
+}
+else
+{
+largest=i;
+}
+
+if(r<=a.size&&a[r]>a[largest])
+{
+largest=r;
+}
+
+if(largest!=i)
+{
+exchange largest and i
+heapify(A,largest)
+
+}
+
+BuildMaxHeap(a)
+{
+a.heapsize=a.length;
+for(i=a.length/2 to 1)
+maxheap(a,i)
+}
+https://www.youtube.com/watch?v=HI97KDV23Ig time complexity
+No of elements in max heap at a particuar height 
+n/2^h+1
+
+No of comparision (in heapify) depends in the level we are doing example level above the leaf means...only one comparsions.....two levels above the leaf
+is two comparisions ....
+
+h tends from 0 to logn
+
+n/2^h+1 * o(h)
+
+
