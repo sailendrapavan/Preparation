@@ -1,0 +1,32 @@
+ArrayDeque is part of the Java Collections Framework and is not written to be inherently thread safe.
+
+Double ended queue.
+It has methods like  add(Adds at last) remove(removes first)
+
+But we can explicitly remove first and add first also(as it is dqueue)
+
+  public boolean add(E e) {
+        addLast(e);
+        return true;
+    }
+
+    public void addFirst(E e) {
+        if (e == null)
+            throw new NullPointerException();
+        elements[head = (head - 1) & (elements.length - 1)] = e;
+        if (head == tail)
+            doubleCapacity();
+    }
+    
+    private static final int MIN_INITIAL_CAPACITY = 8;
+    
+    
+Stack, together with Vector and Hashtable came with Java 1.0 and were implemented with
+thread safe operations (because it seemed like a good idea at the time). Acquiring and 
+releasing thread locks is relatively expensive time wise, hence those data structures will be
+much slower than their compatriots in the JCF.
+
+ArrayDeque class is likely to be faster than Stack when used as a stack.
+ArrayDeque class is likely to be faster than LinkedList when used as a queue
+
+http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/00cd9dc3c2b5/src/share/classes/java/util/ArrayDeque.java

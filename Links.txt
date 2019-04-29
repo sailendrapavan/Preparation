@@ -1,0 +1,2 @@
+https://javarevisited.blogspot.com/2012/11/difference-between-treeset-hashset-vs-linkedhashset-java.html#axzz5eH7x0BNk
+https://javaconceptoftheday.com/how-linkedhashset-works-internally-in-java/

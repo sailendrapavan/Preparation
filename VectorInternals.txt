@@ -1,0 +1,31 @@
+https://coderanch.com/t/384444/java/vector-synchronize
+
+What do you understand synchronize here?
+
+Vector is a thread safe object. if you open Vector source code you will see all the method 
+are taged with synchronize keyword which say the access to that methods are controlled or synchronized. 
+which makes Vector a thread safe. when multiple threads are accesing this Vector object, the object wil be 
+synchronized. The quite opposite datastructure to this is ArrayList, which is not thread safe means not synchronized.
+
+http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/00cd9dc3c2b5/src/share/classes/java/util/Vector.java
+
+
+Main difference between vector and list is check the above vector source code all the methods are synchronised so they are thread safe but array list is 
+not thread safe 
+
+List grows by 50% but vector doubles the size,,,in vector we can specify by what size it can expand
+List and vector has minimum capacity is 10
+
+List and vector internally use the array of type object and do modifications on it 
+
+If size grows it copies into new array of objects and performs operation
+
+Vector can be iterated though enumeration
+
+To be short, Enumeration is legacy Iterator and Enum is a data type. Enums are instance controlled classes in java. ... 
+While Enumeration was the old way to iterate through a collection. It has two methods nextElement and hasMoreElements which are more
+ like next and hasNext methods of Iterator interface.Oct 18, 2013
+
+
+Order is preserved in both array list and vector
+

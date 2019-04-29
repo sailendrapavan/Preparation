@@ -1,0 +1,82 @@
+
+Tree set uses extends AbstractSet and implements NavigableSet
+
+
+We cannot fetch values using the index as we do in list but we can iterate and get the values in it and can remove through 
+Iterator
+
+Tree set Internally uses tree map. 
+
+For map we need key and value pairs....but tree set uses only one value ....but treemap needs two values..
+
+key is the object we are inserting and value will be dummy object(named PRESENT) created by treeset.
+
+https://github.com/Himansu-Nayak/java7-sourcecode/blob/master/java/util/TreeSet.java
+
+All the operations in tree set uses tree map
+
+Tree map inserts the objects like we do in binary tree(If the value is less than node it inserts at left or else right).
+public V put(K key, V value) {
+        Entry<K,V> t = root;
+        if (t == null) {
+            compare(key, key); // type (and possibly null) check
+
+            root = new Entry<>(key, value, null);
+            size = 1;
+            modCount++;
+            return null;
+        }
+        int cmp;
+        Entry<K,V> parent;
+        // split comparator and comparable paths
+        Comparator<? super K> cpr = comparator;
+        if (cpr != null) {
+            do {
+                parent = t;
+                cmp = cpr.compare(key, t.key);
+                if (cmp < 0)
+                    t = t.left;
+                else if (cmp > 0)
+                    t = t.right;
+                else
+                    return t.setValue(value);
+            } while (t != null);
+        }
+        else {
+            if (key == null)
+                throw new NullPointerException();
+            @SuppressWarnings("unchecked")
+                Comparable<? super K> k = (Comparable<? super K>) key;
+            do {
+                parent = t;
+                cmp = k.compareTo(t.key);
+                if (cmp < 0)
+                    t = t.left;
+                else if (cmp > 0)
+                    t = t.right;
+                else
+                    return t.setValue(value); //when we try to insert same key with another value then the value will get replaced
+            } while (t != null);
+        }
+        Entry<K,V> e = new Entry<>(key, value, parent);
+        if (cmp < 0)
+            parent.left = e;
+        else
+            parent.right = e;
+        fixAfterInsertion(e);
+        size++;
+        modCount++;
+        return null;
+    }
+    
+    
+fixAfterInsertion this internally uses red balck tree for balancing to make sure the complexity is of o(longn)
+fixAfterDeletion this helps in balancing the tree after element is removed from the tree.
+
+so adding o(logn) removing o(logn)
+
+How set is not allowing duplicates  ?
+
+return t.setValue(value); if the same key is avialable  then it replaces the value with new value(here our
+value is dummy object PRESENT) 
+    
