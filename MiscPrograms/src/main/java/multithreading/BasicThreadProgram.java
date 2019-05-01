@@ -9,9 +9,15 @@ public class BasicThreadProgram {
 		ra.setPriority(1);
 		r.start();
 		ra.start();
-
-	}
+		//Through lambda expressions using runnable interface
+		Thread s = new Thread(() -> {
+         System.out.println("sjbd");
+	    });
+		s.start();
 }
+}
+
+
 
 class testre extends Thread {
 	testre(String name) {
@@ -26,3 +32,4 @@ class testre extends Thread {
 
 	}
 }
+

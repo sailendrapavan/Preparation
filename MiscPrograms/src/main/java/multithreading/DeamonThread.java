@@ -5,7 +5,6 @@ public class DeamonThread {
 	 public static void main(String args[]) throws InterruptedException  {
 		   
 		  Thread t= Thread.currentThread();
-		  
 		  System.out.println("Mater thread itiated by jvm "+t.getName());
 		  System.out.println("Mater thread itiated by jvm "+t.getPriority());
 	      
@@ -13,7 +12,6 @@ public class DeamonThread {
 	      te.setDaemon(true); //testone is set as demaon thread
 	      te.start();
 	      te.sleep(10);
-	      
 	      System.out.println("main thread");
 	      
 	      
@@ -23,8 +21,8 @@ public class DeamonThread {
 class testone extends Thread {
    
    public void run() {
-	   nestestedThread nest = new nestestedThread();
-	   nest.start();
+//	   nestestedThread nest = new nestestedThread();
+//	   nest.start();
 	   
 	   for(int i=0;i<1000;i++) {
 		  
@@ -56,3 +54,10 @@ class nestestedThread extends Thread{
 
 //Usually even after main thread completes child threads keeps running....if we set child thread as deamon....
 //then if parent thread is died that child thread automatically dies
+/*
+ * 
+JVM terminates itself when all user threads finish their execution
+If JVM finds running daemon thread, it terminates the thread and after that shutdown itself. JVM does not care whether Daemon thread is running or not.
+It is an utmost low priority thread.
+**/
+//Example garbage colelction
