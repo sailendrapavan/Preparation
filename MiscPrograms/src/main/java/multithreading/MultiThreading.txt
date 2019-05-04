@@ -32,3 +32,48 @@ A thread that lies in terminated state does no longer consumes any cycles of CPU
 
 MultiThreading advantages
 
+OnSignleCore
+--------------
+If a process is divided into multiple threads. If some thread does I/O other threads can excecute and this helps us to use
+Better cpu cycles
+
+OnMultipleProcessors
+-------------------
+The advantage will be more as it can use all processors but extra work need to done like allocating same memory across
+different processors
+
+
+
+Yield vs sleep
+------------------------------------
+When we call yield method on the current thread then it will voluntarily give his chance to some other threads of 
+same priority or higher priority if no threads are there then this thread may get chance again
+
+So cpu time will be wasted but we dont know when it will get the chance again
+
+Sleep
+----------------------------------
+Sleep make the process to be in idle for some time. If no other process is there then cpu will be free wasting its 
+resources.. After a particular time again it will become runnable
+
+Best resource for all the state of threads
+
+Blocked state:
+All the threads wait for the lock this can be said as blocking state
+
+Waiting state:
+A thread has given lock using (wait()) method and now thread is in waiting state so when the notification is 
+recieved it execute the next statements after wait method
+
+wait
+join
+
+
+Timed waiting state:
+It waits for certain time and after executes the next commands after waits and goes out of sync block ...so
+it moves again to blocked state(waiting for the turn)
+
+https://dzone.com/articles/difference-between-blocked-waiting-timed-waiting-e
+
+
+

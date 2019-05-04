@@ -1,0 +1,23 @@
+Why we should use thread pool executor service
+
+Server Programs such as database and web servers repeatedly execute requests from multiple clients 
+and these are oriented around processing a large number of short tasks. An approach for building a 
+server application would be to create a new thread each time a request arrives and service this new 
+request in the newly created thread. While this approach seems simple to implement, it has significant 
+disadvantages. A server that creates a new thread for every request would spend more time and consume more 
+system resources in creating and destroying threads than processing actual requests.
+
+
+Risks of using thread pool executor service
+
+DeadLock: If all the threads got occupied but it is waiting for some other process to complete but threads
+are not avilable to full fill that task. Then there will be a problem of dead lock
+
+So what i believe is we should give all independent tasks to executor service
+
+Thread Leakage:
+Suppose a thread is throwed execption that is not caught by thread pool executor then the thread
+will go off from the pool. If the same continues thread pool will be loosing all of its threads
+
+Resource Thrashing : More time will be consumed for context switching if more number of  threads are avaiavlable
+
